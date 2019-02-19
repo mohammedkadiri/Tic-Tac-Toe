@@ -22,7 +22,16 @@ public class TicTacToe {
 	}
 	
 	public static boolean isWon() {
-		return true;
+		// Check all the rows 
+		if( (board[0][0] == 'X' && board[0][1] == 'X' && board[0][2] == 'X') || (board[0][0] == 'O' && board[0][1] == 'O' && board[0][2] == 'O') 
+			|| (board[1][0] == 'X' && board[1][1] == 'X' && board[1][2] == 'X') || (board[1][0] == 'O' && board[1][1] == 'O' && board[1][2] == 'O')
+			|| (board[2][0] == 'X' && board[2][1] == 'X' && board[2][2] == 'X') || (board[2][0] == 'O' && board[2][1] == 'O' && board[21][2] == 'O')
+			|| (board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X') || (board[0][1] == 'O' && board[1][1] == 'O' && board[2][2] == 'O')
+			|| (board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X') || (board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O')
+		  )
+			return false;
+		else
+			return true;
 	}
 	
 	public static void gamePlay() {
@@ -30,17 +39,30 @@ public class TicTacToe {
 		
 		// Add while loop
 		
-		
+		while(isWon()) {
 			getPlayerOneCoordinates();
 			drawBoard();
-			getPlayerTwoCoordinates();
-			drawBoard();
+			if(isWon() == false) {
+				System.out.println();
+				System.out.println(playerOne + "  has won.");
+				break;
+			}
+			else {
+				getPlayerTwoCoordinates();
+				drawBoard();
+				if(isWon() == false) {
+					System.out.println();
+					System.out.println(playerTwo + "  has won.");
+					break;
+				}
+			}
 			
+		}
 		
 	
 	}
 	public static boolean checkPosition(int x, int y) {
-		if(board[x][y] == 'X' || board[x][y] == 'Y') {
+		if(board[x][y] == 'X' || board[x][y] == 'O') {
 			System.out.println("Sorry the position has already been taking enter a different position.");
 			return true;
 		}
